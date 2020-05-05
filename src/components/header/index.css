@@ -1,0 +1,24 @@
+.head {
+    background-image: url('./images/covid-19-eu-cord.org.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+.big {
+    font-size: 4rem;
+    color: #ddccbb;
+}
+
+.small {
+    font-size: 1.5rem;
+    color: #ddccbb;
+}
+
+.small-header {
+    font-size: 1rem;
+    color: #ddccbb;
+}
