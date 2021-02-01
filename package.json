@@ -6,15 +6,21 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "gh-pages": "^2.2.0",
+    "mongoose": "^5.10.6",
+    "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "serverless-http": "^2.6.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build && netlify build",
+    "deploy": "netlify deploy",
+    "finish": "netlify deploy --prod",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,22 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abiola-ajibola/covid-stats-private.git"
-  },
-  "keywords": [
-    "covid",
-    "19",
-    "corona",
-    "virus"
-  ],
-  "author": "Abiola",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abiola-ajibola/covid-stats-private/issues"
-  },
-  "homepage": "https://abiola-ajibola.github.io/covid-stats-private"
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }

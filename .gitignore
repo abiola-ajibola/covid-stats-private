@@ -21,3 +21,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Local Netlify folder
+.netlify
+
+# Dev materials
+netlify.toml
+pkg
+newsSat Sep 19 2020
+todo
+.env
+data.json
+
+
+functions

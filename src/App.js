@@ -5,7 +5,10 @@ import Newspane from './components/news-pane';
 import Statsboard from './components/stats';
 import Searchbar from './components/searchbar';
 import Chart from './components/Modal';
+import fetch from 'node-fetch';
 
+let HOST = (process.env.NODE_ENV === 'production') ? process.env.REACT_APP_API_HOST : 'http://localhost:4888'
+console.log(HOST)
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,26 +29,23 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch('https://api.smartable.ai/coronavirus/stats/global', {
-      method: 'get',
+    fetch(`${HOST}/stats`, {
       headers: {
-        "content-type": "application/json",
-        "Subscription-Key": "d383a676794343deab023ff0a5a7f2e5"
-      }
+        'content-type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({param: 'global'})
     })
       .then(response => response.json())
-      .then(data => this.setState({
-        globalHistory: data.stats.history,
-        globalBreakdowns: data.stats.breakdowns,
-        filteredBreakdowns: data.stats.breakdowns
-      }))
-
-    fetch('https://api.smartable.ai/coronavirus/news/global', {
-      method: 'get',
-      headers: {
-        "content-type": "application/json",
-        "Subscription-Key": "d383a676794343deab023ff0a5a7f2e5"
-      }
+      .then(data => {
+        this.setState({
+          globalHistory: data.stats.history,
+          globalBreakdowns: data.stats.breakdowns,
+          filteredBreakdowns: data.stats.breakdowns
+        });
+      })
+    fetch(`${HOST}/news`, {
+      method: 'get'
     })
       .then(response => response.json())
       .then(data => data.news)
@@ -73,36 +73,33 @@ class App extends React.Component {
 
   fetchHistory(isoCode) {
     if (isoCode !== null) {
-    console.log('Preparing to fetch: ', isoCode);
-    this.setState({
-      openModal: true
-    });
+      console.log('Preparing to fetch: ', isoCode);
+      this.setState({
+        openModal: true
+      });
 
-    console.log('Fetching', isoCode)
-    fetch(`https://api.smartable.ai/coronavirus/stats/${isoCode}`, {
-      method: 'get',
-      headers: {
-        "content-type": "application/json",
-        "Subscription-Key": "d383a676794343deab023ff0a5a7f2e5"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({countryName: data.location.countryOrRegion})
-        return data.stats
+      console.log('Fetching', isoCode)
+      fetch(`${HOST}/stats`, {
+        headers: {
+          'content-type':'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ param: isoCode })
       })
-      .then(stats => stats.history)
-      .then(history => {
-        let newHistory = history.map(detail => {
-          return Object.assign({}, detail, { date: new Date(detail.date).toDateString().slice(4, 10) })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({ countryName: data.location.countryOrRegion })
+          return data.stats.history
         })
-        this.setState((state) => {
-          return {
-            countryHistory: newHistory
-          }
+        // .then(stats => stats.history)
+        .then(history => {
+          this.setState({ countryHistory: [] })
+          let newHistory = history.map(detail => {
+            return Object.assign({}, detail, { date: new Date(detail.date).toDateString().slice(4, 10) })
+          })
+          this.setState({ countryHistory: newHistory})
         })
-      })
-      .catch(e => console.log('Error!', e))
+        .catch(e => console.log('Error!', e))
     } else {
       alert(`Sorry! data not available :(`)
     }

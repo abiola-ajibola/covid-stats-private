@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import './index.css';
 
 const Statsboard = ({ globalBreakdowns, fetchHistory }) => {
-
+    const headHeight = document.querySelector('.head')
     return (
         <main className="board-container main-item">
             <div className="board-item">
@@ -19,7 +19,11 @@ const Statsboard = ({ globalBreakdowns, fetchHistory }) => {
                 globalBreakdowns.map((data, i) => {
                     return (
                         <Fragment key={data.location.countryOrRegion}>
-                            <div className="board-item" onClick={() => fetchHistory(data.location.isoCode)}>
+                            <div className="board-item" onClick={() => {
+                                window.scrollTo(0, headHeight.clientHeight)
+                                fetchHistory(data.location.isoCode)
+                            }
+                            }>
                                 <div className='stat'>
                                     <img className="flag"
                                         src={`https://www.countryflags.io/${data.location.isoCode}/flat/64.png`}
