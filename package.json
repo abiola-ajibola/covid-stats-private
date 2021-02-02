@@ -36,11 +36,6 @@
       "last 1 safari version"
     ]
   },
-<<<<<<< HEAD
-  "devDependencies": {
-    "dotenv": "^8.2.0"
-  }
-=======
   "description": "A React App to display Covid-19 statistics from the world.",
   "main": "index.js",
   "repository": {
@@ -59,5 +54,4 @@
     "url": "https://github.com/abiola-ajibola/covid-stats-private/issues"
   },
   "homepage": "https://awesome-cori-70a96c.netlify.app/"
->>>>>>> update
 }

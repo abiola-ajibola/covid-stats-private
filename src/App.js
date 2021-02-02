@@ -36,23 +36,6 @@ class App extends React.Component {
   componentDidMount = () => {
     fetch(`${HOST}/stats`, {
       headers: {
-<<<<<<< HEAD
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({param: 'global'})
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          globalHistory: data.stats.history,
-          globalBreakdowns: data.stats.breakdowns,
-          filteredBreakdowns: data.stats.breakdowns
-        });
-      })
-    fetch(`${HOST}/news`, {
-      method: 'get'
-=======
         "content-type": "application/json",
       },
       method: "post",
@@ -68,7 +51,6 @@ class App extends React.Component {
       });
     fetch(`${HOST}/news`, {
       method: "get",
->>>>>>> update
     })
       .then((response) => response.json())
       .then((data) => data.news)
@@ -96,35 +78,6 @@ class App extends React.Component {
 
   fetchHistory(isoCode) {
     if (isoCode !== null) {
-<<<<<<< HEAD
-      console.log('Preparing to fetch: ', isoCode);
-      this.setState({
-        openModal: true
-      });
-
-      console.log('Fetching', isoCode)
-      fetch(`${HOST}/stats`, {
-        headers: {
-          'content-type':'application/json'
-        },
-        method: 'post',
-        body: JSON.stringify({ param: isoCode })
-      })
-        .then(res => res.json())
-        .then(data => {
-          this.setState({ countryName: data.location.countryOrRegion })
-          return data.stats.history
-        })
-        // .then(stats => stats.history)
-        .then(history => {
-          this.setState({ countryHistory: [] })
-          let newHistory = history.map(detail => {
-            return Object.assign({}, detail, { date: new Date(detail.date).toDateString().slice(4, 10) })
-          })
-          this.setState({ countryHistory: newHistory})
-        })
-        .catch(e => console.log('Error!', e))
-=======
       console.log("Preparing to fetch: ", isoCode);
       this.setState({
         openModal: true,
@@ -154,7 +107,6 @@ class App extends React.Component {
           this.setState({ countryHistory: newHistory });
         })
         .catch((e) => console.log("Error!", e));
->>>>>>> update
     } else {
       alert(`Sorry! data not available :(`);
     }
