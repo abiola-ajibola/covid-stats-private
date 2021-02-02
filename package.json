@@ -13,9 +13,9 @@
     "recharts": "^1.8.5"
   },
   "scripts": {
-    "predeploy": "npm run build && netlify build",
+    "predeploy": "npm run build",
     "deploy": "netlify deploy",
-    "finish": "netlify deploy --prod",
+    "finish": "npm run build && netlify deploy --prod",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
