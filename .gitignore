@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+.env
+data.json
+pkg
+.eslintcache
+.functions
+.netlify
+netlify.toml
+functions
