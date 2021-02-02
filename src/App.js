@@ -6,14 +6,11 @@ import Statsboard from "./components/stats";
 import Searchbar from "./components/searchbar";
 import Chart from "./components/Modal";
 
-
 let HOST =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_API_HOST
     : "http://localhost:4888";
 
-let HOST = (process.env.NODE_ENV === 'production') ? process.env.REACT_APP_API_HOST : 'http://localhost:4888'
-console.log(HOST)
 class App extends React.Component {
   constructor(props) {
     super(props);
