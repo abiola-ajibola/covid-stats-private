@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 
 const Chart = ({ close, graphData, countryName }) => {
-
+  window.scrollTo(0,277)
     return (
         <div>
             <button onClick={close}>close</button>
